@@ -34,7 +34,7 @@ eval-pipeline/
 │   └── build_site.py      # 生成可视化报告页 site/index.html
 ├── output/                # results.json（全量结构化结果）+ report.md（评估报告）
 ├── site/index.html        # 可视化报告页（自包含，无外部依赖，可直接部署）
-└── screenshots/           # 运行结果截图
+└── screenshots/           # 运行结果截图 + 开发过程截图 + 流水线运行日志
 ```
 
 ## 一、指标定义及理由
@@ -117,6 +117,6 @@ human_ref.json ────────────┤（参考回复供 judge �
 | 代码 | judge.py / evaluate.py / build_report.py / build_site.py 全部生成 | 运行验证、修正生成逻辑 |
 | 报告 | report.md / index.html / README 起草 | 核对结论与数据一致 |
 
-- 开发过程截图：本 Agent 会话即完整开发过程（需求→评分→代码→运行→报告），可直接截取。
-- 运行结果截图：见 `screenshots/`（报告页与终端输出）。
-- 线上报告页：见 README 顶部/提交表单中填写的部署地址。
+- 开发过程截图：见 `screenshots/dev_process_1~3.png`（任务选型分析 → 材料解读 → LLM 按 rubric 逐条评分生成 mock_scores.json，完整记录 Agent 工具的开发过程）。
+- 运行结果截图：见 `screenshots/report_full.png`（报告页全页）与 `screenshots/pipeline_run.log`（流水线运行记录）。
+- 线上报告页：见 README 顶部链接。
