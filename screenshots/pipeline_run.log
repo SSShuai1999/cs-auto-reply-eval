@@ -1,0 +1,19 @@
+# 流水线运行记录 2026-09-17 17:14:33
+
+$ python3 src/evaluate.py --mode mock
+模式: mock | case 数: 20
+整体均分: 3.92 / 5（中位 3.94）
+  忠实度（不瞎编）     均值 4.67  区间 [3.5, 5.0]  权重 0.35
+  准确性          均值 3.92  区间 [2.0, 5.0]  权重 0.3
+  有用性          均值 2.88  区间 [1.5, 4.0]  权重 0.2
+  语气           均值 3.52  区间 [3.0, 4.5]  权重 0.15
+最差 3 条: ['case_20', 'case_11', 'case_19'] -> [3.17, 3.25, 3.3]
+最好 3 条: ['case_09', 'case_10', 'case_08'] -> [4.58, 4.58, 4.47]
+人工判负 case: ['case_01', 'case_03', 'case_04', 'case_06', 'case_07', 'case_08', 'case_10', 'case_12', 'case_13', 'case_15', 'case_16', 'case_17', 'case_20']
+流水线后 5 名与人工判负重合: ['case_01', 'case_20']（2/5）
+已写出: /Users/songshuai/WorkBuddy/2026-09-17-16-08-39/eval-pipeline/output/results.json
+
+$ python3 src/build_report.py
+已写出: /Users/songshuai/WorkBuddy/2026-09-17-16-08-39/eval-pipeline/output/report.md
+$ python3 src/build_site.py
+已写出: /Users/songshuai/WorkBuddy/2026-09-17-16-08-39/eval-pipeline/site/index.html

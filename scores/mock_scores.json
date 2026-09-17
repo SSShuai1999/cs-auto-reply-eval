@@ -1,0 +1,187 @@
+{
+  "judge_mode": "mock",
+  "rubric_version": "v1",
+  "judge_note": "由 LLM 按 rubric_v1 逐条评分生成，模拟真实 LLM API 的结构化返回。真实模式下由 RealJudge 调用 LLM API 产出同构数据。",
+  "cases": [
+    {
+      "id": "case_01",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "建议内容（联系快递员、核对取件码）无虚构政策或数字，无编造。" },
+        "accuracy": { "score": 3.0, "reason": "识别了'取不出快递'的问题，但'到放错的快递柜去取'与用户描述的'取不出来'自相矛盾，方向性错误。" },
+        "helpfulness": { "score": 1.5, "reason": "核心诉求是'帮我取出来'，回复把联系快递员、查取件码等动作全部推给用户自己完成，零主动处理。" },
+        "tone": { "score": 3.0, "reason": "礼貌但无共情，用户明显焦急的场景下没有任何情绪承接。" }
+      }
+    },
+    {
+      "id": "case_02",
+      "scores": {
+        "faithfulness": { "score": 4.5, "reason": "100Wh 民航规定引用正确；但对'这个'充电宝的容量未做查询，回避了具体断言，不构成编造。" },
+        "accuracy": { "score": 3.0, "reason": "用户问的是具体商品能否上飞机，回复只讲了通用规定，答了一半。" },
+        "helpfulness": { "score": 2.0, "reason": "用户仍需自己翻容量标识、自己换算 Wh，最关键的一步没帮用户做。" },
+        "tone": { "score": 3.5, "reason": "中性礼貌，无问题也无亮点。" }
+      }
+    },
+    {
+      "id": "case_03",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "各渠道退款时效（1-3/3-7/5-15 工作日）为常见通用口径，无虚构。" },
+        "accuracy": { "score": 4.0, "reason": "通用说明本身正确（人工标注亦认可），但未针对'我的退款'查询实际状态。" },
+        "helpfulness": { "score": 3.0, "reason": "给出了可预期的时间表和自助查询路径，但'帮我查一下进度'这一动作缺失。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_04",
+      "scores": {
+        "faithfulness": { "score": 4.5, "reason": "7 天质保口径与人工参考一致，排查步骤（重配对、单声道、重启）为合理通用建议。" },
+        "accuracy": { "score": 4.0, "reason": "方案方向正确（退换/换新），但用户已明示'才买三天'，回复仍先给一串自查步骤，重点排序失当。" },
+        "helpfulness": { "score": 2.5, "reason": "增加了用户操作负担：三天质保期内本可直接给退换方案，却先让用户做三步排查。" },
+        "tone": { "score": 3.5, "reason": "有道歉，但故障场景的同理心浓度一般。" }
+      }
+    },
+    {
+      "id": "case_05",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "无事实性断言，不存在编造。" },
+        "accuracy": { "score": 3.5, "reason": "接住了投诉情绪并询问原始问题，但'加强客服培训'是内部事项，对用户无意义，偏离了'马上帮我处理问题'的核心。" },
+        "helpfulness": { "score": 2.5, "reason": "'我现在就帮您处理'是积极信号，但用户等待 20 分钟的损失没有任何补救动作，培训承诺不构成价值。" },
+        "tone": { "score": 4.0, "reason": "道歉及时、态度端正，是本批中语气较好的回复；扣分点在混入内部话术。" }
+      }
+    },
+    {
+      "id": "case_06",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "罗列的四类失效原因（门槛/范围/过期/已用）均为真实常见规则，无编造。" },
+        "accuracy": { "score": 4.0, "reason": "排查方向正确，覆盖了主要原因。" },
+        "helpfulness": { "score": 2.5, "reason": "只给可能性清单，用户需逐条自查；人工做法是直接查该用户的券与订单状态定位问题。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_07",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "防诈骗建议（不点链接、官方渠道核实、改密、二次验证）全部正确且安全导向好。" },
+        "accuracy": { "score": 4.0, "reason": "安全建议专业准确，但用户真正问的是'帮我确认是不是真的'，这一点未直接回答。" },
+        "helpfulness": { "score": 2.5, "reason": "核实动作全部推给用户自己完成，未提供'帮我查登录记录'的主动服务。" },
+        "tone": { "score": 3.0, "reason": "用户处于害怕/紧张情绪中，回复无任何安抚性表达。" }
+      }
+    },
+    {
+      "id": "case_08",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "TPU 软胶的回答与人工参考完全一致，无编造。" },
+        "accuracy": { "score": 5.0, "reason": "直接、正确回答了材质问题。" },
+        "helpfulness": { "score": 3.5, "reason": "答案已给出，但'可以查看商品详情页'属于画蛇添足——人工标注指出用户就是不想自己翻详情页才来问的。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_09",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "运费承担规则（质量问题商家/非质量买家）与人工参考一致。" },
+        "accuracy": { "score": 5.0, "reason": "规则说明准确完整。" },
+        "helpfulness": { "score": 4.0, "reason": "规则本身有决策价值；未像人工那样追问'您是哪种情况'给出针对性结论，轻微扣分。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_10",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "取消规则与退款时效与人工参考一致，无编造。" },
+        "accuracy": { "score": 5.0, "reason": "明确回答'可以取消'，条件、路径、退款时间齐全。" },
+        "helpfulness": { "score": 4.0, "reason": "操作路径明确可执行；人工做法是直接帮用户操作，自动回复让用户自助，作为自动回复可接受。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_11",
+      "scores": {
+        "faithfulness": { "score": 3.5, "reason": "先说'换货需要先退货再重新下单'，后说'分别发起换货申请'，两种流程自相矛盾，'换货=先退再买'属于无据自创规则。" },
+        "accuracy": { "score": 3.0, "reason": "流程表述前后矛盾，用户无法判断到底该走哪条路径。" },
+        "helpfulness": { "score": 3.0, "reason": "给了大致路径但混乱，且未追问两件商品分别换什么尺码这一必要信息。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_12",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "三类可能原因（中转/更新延迟/包裹异常）均为合理说明，无编造。" },
+        "accuracy": { "score": 4.0, "reason": "原因分析方向正确。" },
+        "helpfulness": { "score": 2.5, "reason": "只让用户'耐心等待'或自行联系快递，未提供'帮我查物流状态'的主动动作。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_13",
+      "scores": {
+        "faithfulness": { "score": 4.5, "reason": "未虚构成分信息；'先买小样做皮肤测试'属合理建议而非事实断言。" },
+        "accuracy": { "score": 3.5, "reason": "用户明确诉求是'把成分表发给我'，回复未给出任何成分信息，且未接住'我皮肤敏感'的个性化诉求。" },
+        "helpfulness": { "score": 2.0, "reason": "核心动作（发成分表/帮忙核对过敏成分）完全缺失，全部推给用户自助。" },
+        "tone": { "score": 3.0, "reason": "对皮肤敏感用户没有体现特别关照，语气偏流程化。" }
+      }
+    },
+    {
+      "id": "case_14",
+      "scores": {
+        "faithfulness": { "score": 4.5, "reason": "'部分商品已支持视频展示'为轻度无据断言但风险低；反馈转达属合理承诺。" },
+        "accuracy": { "score": 4.5, "reason": "建议类反馈的正确处理方式：感谢+承诺转达+告知现状。" },
+        "helpfulness": { "score": 4.0, "reason": "建议类场景只需接住并反馈，做到了；人工会进一步追问具体商品，略胜。" },
+        "tone": { "score": 4.5, "reason": "感谢表达自然，是全批语气最好的回复之一。" }
+      }
+    },
+    {
+      "id": "case_15",
+      "scores": {
+        "faithfulness": { "score": 4.0, "reason": "'可以申请额外的补偿优惠券'为无据承诺（具体补偿形式未经核实），但属低风险善意承诺。" },
+        "accuracy": { "score": 4.0, "reason": "退货退款+反馈品控的处理方向正确。" },
+        "helpfulness": { "score": 3.5, "reason": "方案齐全（退款、运费、品控反馈、补偿），但补偿表述模糊（'可以申请'），人工会给出具体补偿（如 50 元券）。" },
+        "tone": { "score": 3.5, "reason": "有道歉，但面对'连续两次'的强烈不满，安抚力度与重视程度不够。" }
+      }
+    },
+    {
+      "id": "case_16",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "未虚构任何机型参数或对比结论，无编造。" },
+        "accuracy": { "score": 4.0, "reason": "对模糊问题（'那两款'）采取追问策略是合理的。" },
+        "helpfulness": { "score": 3.0, "reason": "追问预算和场景是加分项，但'查看商品详情页的用户评价'又把用户推走了，未主动做对比。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_17",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "无事实性断言，不存在编造。" },
+        "accuracy": { "score": 4.5, "reason": "正确识别并拆分了用户一条消息里的两个意图（退货进度+快递进度），这是全批少有的多意图正确处理。" },
+        "helpfulness": { "score": 3.5, "reason": "两个问题都给了查询路径，且提出'提供订单号我帮您查'，有一定主动性，但仍以自助为主。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_18",
+      "scores": {
+        "faithfulness": { "score": 4.5, "reason": "30 天质保口径与人工参考一致，质量问题的判定合理。" },
+        "accuracy": { "score": 5.0, "reason": "正确判定质量问题并给出退货/换新两个选项及运费承担，信息完整。" },
+        "helpfulness": { "score": 4.0, "reason": "解决方案直接可用；人工会先确认用户倾向哪种方案再执行，自动回复缺这一步确认。" },
+        "tone": { "score": 4.0, "reason": "有道歉且态度清晰，故障场景处理得当。" }
+      }
+    },
+    {
+      "id": "case_19",
+      "scores": {
+        "faithfulness": { "score": 3.5, "reason": "'加入购物车，补货时系统会自动提醒您'是对系统功能的无据断言，若该功能不存在即为典型编造，风险较高。" },
+        "accuracy": { "score": 3.5, "reason": "未查询具体商品补货计划，只给通用建议，'什么时候补货'这一直接问题未回答。" },
+        "helpfulness": { "score": 2.5, "reason": "核心动作（查补货时间、帮设到货提醒）缺失，建议（关注页面、加购物车）均为用户自助。" },
+        "tone": { "score": 3.5, "reason": "平稳礼貌。" }
+      }
+    },
+    {
+      "id": "case_20",
+      "scores": {
+        "faithfulness": { "score": 5.0, "reason": "复述的退货流程步骤本身无虚构。" },
+        "accuracy": { "score": 2.0, "reason": "典型答非所问：用户说'流程太复杂搞不懂'，回复恰恰把该流程原样复述一遍，人工标注明确判定为'答非所问'。" },
+        "helpfulness": { "score": 1.5, "reason": "用户需要的是'问我卡在哪一步、针对性带我操作'，回复提供了用户已经明确表示看不懂的同一份信息，价值为负。" },
+        "tone": { "score": 3.5, "reason": "有道歉，但对挫败情绪的承接不足。" }
+      }
+    }
+  ]
+}

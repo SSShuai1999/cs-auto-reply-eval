@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>客服自动回复质量评估报告</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:#f6f7f9; color:#1f2329; line-height:1.6; }
+  .wrap { max-width:1080px; margin:0 auto; padding:40px 24px 64px; }
+  header { margin-bottom:28px; }
+  h1 { font-size:26px; margin-bottom:6px; }
+  .sub { color:#646a73; font-size:14px; }
+  .hero { display:flex; gap:24px; align-items:stretch; margin:24px 0; flex-wrap:wrap; }
+  .card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:20px 24px; }
+  .hero-main { flex:1; min-width:280px; display:flex; align-items:center; gap:28px; }
+  .big-score { font-size:56px; font-weight:700; color:#f59e0b; line-height:1; }
+  .big-score small { font-size:20px; color:#9ca3af; font-weight:400; }
+  .verdict { flex:1; font-size:14px; color:#374151; }
+  .verdict b { color:#b45309; }
+  h2 { font-size:19px; margin:34px 0 14px; padding-left:10px; border-left:4px solid #6366f1; }
+  .grid4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+  .metric-head { font-size:14px; font-weight:600; display:flex; align-items:center; gap:8px; }
+  .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .weight { margin-left:auto; font-size:12px; color:#9ca3af; font-weight:400; }
+  .metric-score { font-size:32px; font-weight:700; margin:8px 0 6px; }
+  .of5 { font-size:14px; color:#9ca3af; font-weight:400; }
+  .bar { height:8px; background:#f0f1f3; border-radius:4px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:4px; }
+  .range { font-size:12px; color:#9ca3af; margin:6px 0 10px; }
+  .dist { display:flex; height:10px; border-radius:5px; overflow:hidden; }
+  .seg { height:100%; }
+  .dist-legend { font-size:11px; color:#b0b4ba; margin-top:6px; }
+  .grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; }
+  .worst-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .cid { font-weight:700; font-family:ui-monospace,monospace; }
+  .overall { font-weight:700; }
+  .q { font-size:13px; color:#646a73; margin-bottom:8px; }
+  .chips { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+  .chip { font-size:12px; padding:2px 8px; border-radius:10px; background:#f3f4f6; }
+  .analysis { font-size:13px; color:#374151; margin-bottom:8px; }
+  .human { font-size:12px; color:#9ca3af; border-top:1px dashed #e5e7eb; padding-top:8px; }
+  table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; font-size:13px; }
+  th,td { padding:8px 10px; text-align:left; border-bottom:1px solid #f0f1f3; }
+  th { background:#fafbfc; color:#646a73; font-weight:600; }
+  .qcell { color:#646a73; }
+  .s-good { color:#16a34a; } .s-ok { color:#65a30d; } .s-mid { color:#d97706; } .s-bad { color:#dc2626; }
+  .val-card { font-size:14px; color:#374151; }
+  .val-card li { margin:6px 0 6px 18px; }
+  footer { margin-top:36px; font-size:12px; color:#9ca3af; text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>客服自动回复质量评估报告</h1>
+    <div class="sub">评估对象：20 组「用户问题 + 自动回复」 · 模式：mock（rubric v1，LLM-as-judge） · 四指标加权总分</div>
+  </header>
+
+  <div class="hero">
+    <div class="card hero-main">
+      <div class="big-score">3.92<small> /5</small></div>
+      <div class="verdict">
+        整体处于「可用但不及格」区间。忠实度 4.67 说明基本不瞎编、底线可用；
+        但<b>有用性仅 2.88，为全场最短板</b>——普遍只给通用说明、不帮用户实际处理。
+        建议先修复最差 case 暴露的三类系统性问题，复评达标后再扩大覆盖范围。
+      </div>
+    </div>
+  </div>
+
+  <h2>各指标得分与分布</h2>
+  <div class="grid4">
+        <div class="card metric-card">
+          <div class="metric-head"><span class="dot" style="background:#6366f1"></span>忠实度（不瞎编）<span class="weight">权重 35%</span></div>
+          <div class="metric-score">4.67<span class="of5">/5</span></div>
+          <div class="bar"><div class="bar-fill" style="width:93%;background:#6366f1"></div></div>
+          <div class="range">区间 3.5 – 5.0</div>
+          <div class="dist"><div class="seg" style="width:10.0%;background:#ef4444" title="[3,4) 中等: 2条"></div><div class="seg" style="width:5.0%;background:#fb923c" title="[4,4.5) 良好: 1条"></div><div class="seg" style="width:85.0%;background:#facc15" title="[4.5,5] 优秀: 17条"></div></div>
+          <div class="dist-legend">红→绿：低分段 → 高分段分布</div>
+        </div>
+        <div class="card metric-card">
+          <div class="metric-head"><span class="dot" style="background:#0ea5e9"></span>准确性<span class="weight">权重 30%</span></div>
+          <div class="metric-score">3.92<span class="of5">/5</span></div>
+          <div class="bar"><div class="bar-fill" style="width:78%;background:#0ea5e9"></div></div>
+          <div class="range">区间 2.0 – 5.0</div>
+          <div class="dist"><div class="seg" style="width:5.0%;background:#ef4444" title="[2,3) 较差: 1条"></div><div class="seg" style="width:30.0%;background:#fb923c" title="[3,4) 中等: 6条"></div><div class="seg" style="width:35.0%;background:#facc15" title="[4,4.5) 良好: 7条"></div><div class="seg" style="width:30.0%;background:#4ade80" title="[4.5,5] 优秀: 6条"></div></div>
+          <div class="dist-legend">红→绿：低分段 → 高分段分布</div>
+        </div>
+        <div class="card metric-card">
+          <div class="metric-head"><span class="dot" style="background:#f59e0b"></span>有用性<span class="weight">权重 20%</span></div>
+          <div class="metric-score">2.88<span class="of5">/5</span></div>
+          <div class="bar"><div class="bar-fill" style="width:58%;background:#f59e0b"></div></div>
+          <div class="range">区间 1.5 – 4.0</div>
+          <div class="dist"><div class="seg" style="width:10.0%;background:#ef4444" title="[1,2) 差: 2条"></div><div class="seg" style="width:40.0%;background:#fb923c" title="[2,3) 较差: 8条"></div><div class="seg" style="width:30.0%;background:#facc15" title="[3,4) 中等: 6条"></div><div class="seg" style="width:20.0%;background:#4ade80" title="[4,4.5) 良好: 4条"></div></div>
+          <div class="dist-legend">红→绿：低分段 → 高分段分布</div>
+        </div>
+        <div class="card metric-card">
+          <div class="metric-head"><span class="dot" style="background:#10b981"></span>语气<span class="weight">权重 15%</span></div>
+          <div class="metric-score">3.52<span class="of5">/5</span></div>
+          <div class="bar"><div class="bar-fill" style="width:70%;background:#10b981"></div></div>
+          <div class="range">区间 3.0 – 4.5</div>
+          <div class="dist"><div class="seg" style="width:85.0%;background:#ef4444" title="[3,4) 中等: 17条"></div><div class="seg" style="width:10.0%;background:#fb923c" title="[4,4.5) 良好: 2条"></div><div class="seg" style="width:5.0%;background:#facc15" title="[4.5,5] 优秀: 1条"></div></div>
+          <div class="dist-legend">红→绿：低分段 → 高分段分布</div>
+        </div></div>
+
+  <h2>最差 3 条 case 及分析</h2>
+  <div class="grid3">
+        <div class="card worst-card">
+          <div class="worst-head"><span class="cid">case_20</span><span class="overall s-mid">总分 3.17</span></div>
+          <div class="q">用户：退货流程太复杂了搞半天都不知道怎么操作</div>
+          <div class="chips"><span class="chip s-good">忠实 5.0</span><span class="chip s-bad">准确 2.0</span><span class="chip s-bad">有用 1.5</span><span class="chip s-mid">语气 3.5</span></div>
+          <p class="analysis">用户说「搞不懂退货流程」，回复却把同一份流程原样复述——提供的是用户已声明无效的信息。根因是意图识别粒度过粗：只匹配了问题主题，没识别出这是抱怨/求助而非咨询。</p>
+          <p class="human">人工标注：用户已经表达了操作困难和不满。自动回复又重复了一遍退货流程——这恰恰是用户说搞不懂的东西。人工回复会问具体卡在哪一步，然后针对性帮忙。自动回复属于&#x27;答非所问&#x27;。</p>
+        </div>
+        <div class="card worst-card">
+          <div class="worst-head"><span class="cid">case_11</span><span class="overall s-mid">总分 3.25</span></div>
+          <div class="q">用户：买了两件衣服一件大了一件小了想换尺码</div>
+          <div class="chips"><span class="chip s-mid">忠实 3.5</span><span class="chip s-mid">准确 3.0</span><span class="chip s-mid">有用 3.0</span><span class="chip s-mid">语气 3.5</span></div>
+          <p class="analysis">同一回复内给出两条互斥路径（「换货=先退再买」与「发起换货申请」），且「换货=先退再买」属无据自创规则。根因是多商品场景触发流程拼接，缺内部一致性自检。</p>
+          <p class="human">人工标注：用户的问题包含两件不同的商品，需要确认具体信息才能操作。自动回复直接给出了通用流程说明，没有追问具体商品信息来帮用户处理。</p>
+        </div>
+        <div class="card worst-card">
+          <div class="worst-head"><span class="cid">case_19</span><span class="overall s-mid">总分 3.3</span></div>
+          <div class="q">用户：我要买的那个包什么时候补货</div>
+          <div class="chips"><span class="chip s-mid">忠实 3.5</span><span class="chip s-mid">准确 3.5</span><span class="chip s-bad">有用 2.5</span><span class="chip s-mid">语气 3.5</span></div>
+          <p class="analysis">声称「加入购物车后系统自动提醒补货」——对系统功能的无据断言，若功能不存在即为典型编造，用户会基于不存在的功能产生预期，风险极高。</p>
+          <p class="human">人工标注：用户问的是具体商品的补货时间。自动回复没有查具体商品，给了通用建议。人工回复会实际查询补货计划并主动帮用户设置提醒。</p>
+        </div></div>
+
+  <h2>与人工标注的一致性验证</h2>
+  <div class="card val-card">
+    <ul>
+      <li><b>短板判断一致</b>：人工标注 13/20 条提到「没有帮用户处理 / 把责任推给用户」；本流水线四指标中有用性均值最低（2.88）——两者独立得出同一结论。</li>
+      <li><b>词法信号交叉验证</b>：有用性低分（≤2.5）的 10 条中，8/10 同时被「主动处理 vs 推诿」词法检测判为净推诿，judge 评分有可解释信号支撑。</li>
+      <li><b>最差 case 重合</b>：总分后 5 名 case_01、case_02、case_11、case_19、case_20 中，case_01、case_20 也是人工措辞最严厉的两条。</li>
+    </ul>
+  </div>
+
+  <h2>20 条全量得分（按总分升序）</h2>
+  <table>
+    <thead><tr><th>case</th><th>总分</th><th>忠实度</th><th>准确性</th><th>有用性</th><th>语气</th><th>用户问题</th></tr></thead>
+    <tbody><tr><td>case_20</td><td class="s-mid"><b>3.17</b></td><td class="s-good">5.0</td><td class="s-bad">2.0</td><td class="s-bad">1.5</td><td class="s-mid">3.5</td><td class="qcell">退货流程太复杂了搞半天都不知道怎么操作</td></tr><tr><td>case_11</td><td class="s-mid"><b>3.25</b></td><td class="s-mid">3.5</td><td class="s-mid">3.0</td><td class="s-mid">3.0</td><td class="s-mid">3.5</td><td class="qcell">买了两件衣服一件大了一件小了想换尺码</td></tr><tr><td>case_19</td><td class="s-mid"><b>3.3</b></td><td class="s-mid">3.5</td><td class="s-mid">3.5</td><td class="s-bad">2.5</td><td class="s-mid">3.5</td><td class="qcell">我要买的那个包什么时候补货</td></tr><tr><td>case_01</td><td class="s-mid"><b>3.4</b></td><td class="s-good">5.0</td><td class="s-mid">3.0</td><td class="s-bad">1.5</td><td class="s-mid">3.0</td><td class="qcell">我的快递到了但是放错快递柜了，取不出来</td></tr><tr><td>case_02</td><td class="s-mid"><b>3.4</b></td><td class="s-good">4.5</td><td class="s-mid">3.0</td><td class="s-bad">2.0</td><td class="s-mid">3.5</td><td class="qcell">这个充电宝能带上飞机吗</td></tr><tr><td>case_13</td><td class="s-mid"><b>3.48</b></td><td class="s-good">4.5</td><td class="s-mid">3.5</td><td class="s-bad">2.0</td><td class="s-mid">3.0</td><td class="qcell">我买的面膜成分表能发给我看看吗我皮肤敏感</td></tr><tr><td>case_04</td><td class="s-mid"><b>3.8</b></td><td class="s-good">4.5</td><td class="s-ok">4.0</td><td class="s-bad">2.5</td><td class="s-mid">3.5</td><td class="qcell">我买的蓝牙耳机左耳没声音了，才买三天</td></tr><tr><td>case_15</td><td class="s-mid"><b>3.83</b></td><td class="s-ok">4.0</td><td class="s-ok">4.0</td><td class="s-mid">3.5</td><td class="s-mid">3.5</td><td class="qcell">我上次买的东西收到是坏的这次又是坏的</td></tr><tr><td>case_05</td><td class="s-mid"><b>3.9</b></td><td class="s-good">5.0</td><td class="s-mid">3.5</td><td class="s-bad">2.5</td><td class="s-ok">4.0</td><td class="qcell">你们客服态度太差了等了20分钟都没人理我</td></tr><tr><td>case_07</td><td class="s-mid"><b>3.9</b></td><td class="s-good">5.0</td><td class="s-ok">4.0</td><td class="s-bad">2.5</td><td class="s-mid">3.0</td><td class="qcell">我收到短信说账号异地登录了是真的吗</td></tr><tr><td>case_06</td><td class="s-mid"><b>3.98</b></td><td class="s-good">5.0</td><td class="s-ok">4.0</td><td class="s-bad">2.5</td><td class="s-mid">3.5</td><td class="qcell">优惠券怎么用不了</td></tr><tr><td>case_12</td><td class="s-mid"><b>3.98</b></td><td class="s-good">5.0</td><td class="s-ok">4.0</td><td class="s-bad">2.5</td><td class="s-mid">3.5</td><td class="qcell">快递两天没更新了</td></tr><tr><td>case_03</td><td class="s-ok"><b>4.08</b></td><td class="s-good">5.0</td><td class="s-ok">4.0</td><td class="s-mid">3.0</td><td class="s-mid">3.5</td><td class="qcell">退款什么时候能到账</td></tr><tr><td>case_16</td><td class="s-ok"><b>4.08</b></td><td class="s-good">5.0</td><td class="s-ok">4.0</td><td class="s-mid">3.0</td><td class="s-mid">3.5</td><td class="qcell">你们首页推荐的那两款手机哪个好</td></tr><tr><td>case_17</td><td class="s-ok"><b>4.33</b></td><td class="s-good">5.0</td><td class="s-good">4.5</td><td class="s-mid">3.5</td><td class="s-mid">3.5</td><td class="qcell">我那个退货的事顺便看看快递到没到</td></tr><tr><td>case_14</td><td class="s-ok"><b>4.4</b></td><td class="s-good">4.5</td><td class="s-good">4.5</td><td class="s-ok">4.0</td><td class="s-good">4.5</td><td class="qcell">你们能不能加个功能下单前能看实物视频</td></tr><tr><td>case_08</td><td class="s-ok"><b>4.47</b></td><td class="s-good">5.0</td><td class="s-good">5.0</td><td class="s-mid">3.5</td><td class="s-mid">3.5</td><td class="qcell">这个手机壳是硅胶的还是塑料的</td></tr><tr><td>case_18</td><td class="s-ok"><b>4.47</b></td><td class="s-good">4.5</td><td class="s-good">5.0</td><td class="s-ok">4.0</td><td class="s-ok">4.0</td><td class="qcell">那个扫地机器人用了两周就不工作了</td></tr><tr><td>case_09</td><td class="s-good"><b>4.58</b></td><td class="s-good">5.0</td><td class="s-good">5.0</td><td class="s-ok">4.0</td><td class="s-mid">3.5</td><td class="qcell">退货邮费谁出</td></tr><tr><td>case_10</td><td class="s-good"><b>4.58</b></td><td class="s-good">5.0</td><td class="s-good">5.0</td><td class="s-ok">4.0</td><td class="s-mid">3.5</td><td class="qcell">刚下单还没发货能取消吗</td></tr></tbody>
+  </table>
+
+  <footer>评估流水线：LLM-as-judge（rubric v1，4 指标 1-5 分锚点评分）+ 词法辅助信号交叉验证 · 完整逐条评分理由见 results.json</footer>
+</div>
+</body>
+</html>
